@@ -1,0 +1,205 @@
+/* style.css */
+
+/* ------------------------------------------------------------
+   Root variables – easy theming
+   ------------------------------------------------------------ */
+:root {
+    /* Primary colour – used for most buttons */
+    --primary: #4a90e2;          /* a calm blue */
+    /* Secondary colour – used for control buttons (clear, backspace, toggle) */
+    --secondary: #e94e77;        /* a soft red/pink */
+    /* Accent colour – used for operators and focus outlines */
+    --accent: #f5a623;           /* warm orange */
+    /* Background colour for the page */
+    --bg: #f0f0f0;
+    /* Calculator container background */
+    --calc-bg: #ffffff;
+    /* Display background */
+    --display-bg: #e0e0e0;
+    /* Text colour */
+    --text: #333333;
+}
+
+/* ------------------------------------------------------------
+   Global body styling – centre the calculator and set a
+   responsive base font size.
+   ------------------------------------------------------------ */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg);
+    /* Responsive font size – never smaller than 14px, never larger than 18px */
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: var(--text);
+    line-height: 1.4;
+}
+
+/* ------------------------------------------------------------
+   Calculator container
+   ------------------------------------------------------------ */
+.calculator {
+    width: 100%;
+    max-width: 360px;               /* fits nicely on most screens */
+    background-color: var(--calc-bg);
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ------------------------------------------------------------
+   Display – shows the current number / result
+   ------------------------------------------------------------ */
+.display {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 2rem;               /* large, readable */
+    text-align: right;
+    background-color: var(--display-bg);
+    color: var(--text);
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    overflow-x: auto;              /* allow long numbers to scroll horizontally */
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   Buttons grid – 4 columns, consistent gap
+   ------------------------------------------------------------ */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   Base button styling – shared by all calculator keys
+   ------------------------------------------------------------ */
+.btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover / active feedback */
+.btn:hover {
+    background-color: #3a78c2; /* slightly darker than primary */
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Focus‑visible – keyboard accessibility */
+.btn:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------
+   Specific button categories
+   ------------------------------------------------------------ */
+/* Operators (+, -, *, /) */
+.operator {
+    background-color: var(--accent);
+    color: var(--bg);
+}
+
+.operator:hover {
+    background-color: #d48c1a; /* darker accent */
+}
+
+/* Control buttons – clear, backspace, theme toggle, etc. */
+.control {
+    background-color: var(--secondary);
+    color: var(--bg);
+}
+
+.control:hover {
+    background-color: #c43d5b; /* darker secondary */
+}
+
+/* Equality button – distinct success colour */
+.equals {
+    background-color: #4caf50; /* green */
+    color: #ffffff;
+}
+
+.equals:hover {
+    background-color: #367c39;
+}
+
+/* Clear button – explicit red for quick visual cue */
+.clear {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+.clear:hover {
+    background-color: #d32f2f;
+}
+
+/* Backspace – keep same styling as control but we can add a tiny tweak */
+.backspace {
+    /* inherits .control styles */
+}
+
+/* Decimal button – treat as a regular number */
+.decimal {
+    /* inherits .btn styles */
+}
+
+/* ------------------------------------------------------------
+   History panel (if used elsewhere) – keep original styling
+   ------------------------------------------------------------ */
+.history {
+    margin-top: 1rem;
+    border-top: 1px solid #ccc;
+    padding-top: 0.5rem;
+    height: 8rem;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    color: #555;
+    background-color: #fafafa;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   Responsive adjustments for smaller screens (mobile)
+   ------------------------------------------------------------ */
+@media (max-width: 480px) {
+    .calculator {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .display {
+        font-size: 1.5rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+}
